@@ -1,12 +1,14 @@
 import os
 from openai import AzureOpenAI  
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider  
-  
-endpoint = os.getenv("ENDPOINT_URL", "https://aoai-lm-demo.openai.azure.com/")
-deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
+from dotenv import load_dotenv
+
+load_dotenv()  
+endpoint = os.getenv("ENDPOINT_URL")
+deployment = os.getenv("DEPLOYMENT_NAME")
   
 # Initialize Azure OpenAI client with Entra ID authentication  
-cognitiveServicesResource = os.getenv('AZURE_COGNITIVE_SERVICES_RESOURCE', 'https://cognitiveservices.azure.com/')  
+cognitiveServicesResource = os.getenv('AZURE_COGNITIVE_SERVICES_RESOURCE')  
 token_provider = get_bearer_token_provider(  
     DefaultAzureCredential(),  
     f'{cognitiveServicesResource}.default'  
@@ -40,7 +42,7 @@ def get_answer(question):
             {  
                 "type": "azure_search",  
                 "parameters": {  
-                    "endpoint": os.environ["AISEARCH_API_ENDPOINT"],  
+                    "endpoint": os.getenv("AISEARCH_API_ENDPOINT"),  
                     "index_name": "index40",  
                     "authentication": {  
                         "type": "system_assigned_managed_identity"  
