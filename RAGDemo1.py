@@ -43,7 +43,7 @@ def get_answer(question):
                 "type": "azure_search",  
                 "parameters": {  
                     "endpoint": os.getenv("AISEARCH_API_ENDPOINT"),  
-                    "index_name": "index40",  
+                    "index_name": "contoso-index-demo",  
                     "authentication": {  
                         "type": "system_assigned_managed_identity"  
                     }  
